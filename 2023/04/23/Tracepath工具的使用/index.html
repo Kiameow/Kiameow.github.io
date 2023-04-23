@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="tracepath的用途Linux 中的 tracepath 命令允许使用 UDP 端口或不需要任何超级用户权限的任何其他端口来跟踪到目标路径的路径，确定沿此路径的 MTU（maxium transimission unit最大传输单元）。 tracepath的使用 tracepath : 提示你该如何使用tracepath tracepath &lt;&lt;destination&gt;&amp;gt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tracepath工具的使用">
+<meta property="og:url" content="http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="Kia&#39;s Blog">
+<meta property="og:description" content="tracepath的用途Linux 中的 tracepath 命令允许使用 UDP 端口或不需要任何超级用户权限的任何其他端口来跟踪到目标路径的路径，确定沿此路径的 MTU（maxium transimission unit最大传输单元）。 tracepath的使用 tracepath : 提示你该如何使用tracepath tracepath &lt;&lt;destination&gt;&amp;gt">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/images/tracepath_fail_result.png">
+<meta property="og:image" content="http://example.com/images/tracepath_success_result.png">
+<meta property="article:published_time" content="2023-04-23T13:27:22.000Z">
+<meta property="article:modified_time" content="2023-04-23T14:07:31.538Z">
+<meta property="article:author" content="Kia">
+<meta property="article:tag" content="Linux_tool">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/tracepath_fail_result.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Tracepath工具的使用</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/The-Kia">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/&text=Tracepath工具的使用"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/&title=Tracepath工具的使用"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/&is_video=false&description=Tracepath工具的使用"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Tracepath工具的使用&body=Check out this article: http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/&title=Tracepath工具的使用"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/&title=Tracepath工具的使用"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/&title=Tracepath工具的使用"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/&title=Tracepath工具的使用"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/&name=Tracepath工具的使用&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/&t=Tracepath工具的使用"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tracepath%E7%9A%84%E7%94%A8%E9%80%94"><span class="toc-number">1.</span> <span class="toc-text">tracepath的用途</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tracepath%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">tracepath的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90%E5%B1%95%E7%A4%BA"><span class="toc-number">2.1.</span> <span class="toc-text">例子展示</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Tracepath工具的使用
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Kia</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-04-23T13:27:22.000Z" itemprop="datePublished">2023-04-23</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Linux-tool/" rel="tag">Linux_tool</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="tracepath的用途"><a href="#tracepath的用途" class="headerlink" title="tracepath的用途"></a>tracepath的用途</h2><p>Linux 中的 tracepath 命令允许使用 UDP 端口或不需要任何超级用户权限的任何其他端口来跟踪到目标路径的路径，确定沿此路径的 MTU（maxium transimission unit最大传输单元）。</p>
+<h2 id="tracepath的使用"><a href="#tracepath的使用" class="headerlink" title="tracepath的使用"></a>tracepath的使用</h2><ul>
+<li><code>tracepath</code> : 提示你该如何使用tracepath</li>
+<li><code>tracepath &lt;&lt;destination&gt;&gt;</code> : 查询通往destination的路径信息</li>
+<li><code>tracepath -n &lt;&lt;destination&gt;&gt;</code> : 只显示路由IP地址</li>
+<li><code>tracepath -b &lt;&lt;destination&gt;&gt;</code> : 同时显示路由域名和IP地址</li>
+<li><code>tracepath -m &lt;&lt;number&gt;&gt; &lt;&lt;destination&gt;&gt;</code> : 规定最大跳数（经过的路由节点数量）（不指定则为30个）</li>
+<li><code>tracepath -l &lt;&lt;number&gt;&gt; &lt;&lt;destination&gt;&gt;</code> : 规定包字节大小（不懂捏）</li>
+<li><code>tracepath -p &lt;&lt;destination&gt;&gt;</code> : 允许指定端口被使用（不懂捏）</li>
+</ul>
+<h3 id="例子展示"><a href="#例子展示" class="headerlink" title="例子展示"></a>例子展示</h3><p>Q：<br>现在我想知道通往<code>gaia.cs.umass.edu</code>的最后一个路由，即在你与服务端这条路径上距离<code>gaia.cs.umass.edu</code>最近的一个路由地址，请告诉我吧。<br>A：<br>执行命令<code>tracepath -b gaia.cs.umass.edu</code><br>    结果:在30跳以后，发现仍未到达服务端，于是设定最大跳数为50跳。<br>    <img src="/images/tracepath_fail_result.png"></p>
+<p>执行命令<code>tracepath -b -m 50 gaia.cs.umass.edu</code><br>    结果:成功了，gaia.cs.umass.edu的上一个路由为<code>nscs1bbs1.cs.umass.edu (128.119.240.253)</code><br>    <img src="/images/tracepath_success_result.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/The-Kia">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tracepath%E7%9A%84%E7%94%A8%E9%80%94"><span class="toc-number">1.</span> <span class="toc-text">tracepath的用途</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tracepath%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">tracepath的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90%E5%B1%95%E7%A4%BA"><span class="toc-number">2.1.</span> <span class="toc-text">例子展示</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/&text=Tracepath工具的使用"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/&title=Tracepath工具的使用"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/&is_video=false&description=Tracepath工具的使用"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Tracepath工具的使用&body=Check out this article: http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/&title=Tracepath工具的使用"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/&title=Tracepath工具的使用"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/&title=Tracepath工具的使用"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/&title=Tracepath工具的使用"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/&name=Tracepath工具的使用&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/04/23/Tracepath%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/&t=Tracepath工具的使用"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2023
+    Kia
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/The-Kia">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

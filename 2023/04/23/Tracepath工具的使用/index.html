@@ -16,7 +16,7 @@
 <meta property="og:image" content="http://example.com/images/tracepath_fail_result.png">
 <meta property="og:image" content="http://example.com/images/tracepath_success_result.png">
 <meta property="article:published_time" content="2023-04-23T13:27:22.000Z">
-<meta property="article:modified_time" content="2023-04-23T14:07:31.538Z">
+<meta property="article:modified_time" content="2023-04-24T06:19:42.451Z">
 <meta property="article:author" content="Kia">
 <meta property="article:tag" content="Linux_tool">
 <meta name="twitter:card" content="summary">
@@ -107,7 +107,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tracepath%E7%9A%84%E7%94%A8%E9%80%94"><span class="toc-number">1.</span> <span class="toc-text">tracepath的用途</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tracepath%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">tracepath的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90%E5%B1%95%E7%A4%BA"><span class="toc-number">2.1.</span> <span class="toc-text">例子展示</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tracepath%E7%9A%84%E7%94%A8%E9%80%94"><span class="toc-number">1.</span> <span class="toc-text">tracepath的用途</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tracepath%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">tracepath的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90%E5%B1%95%E7%A4%BA"><span class="toc-number">2.1.</span> <span class="toc-text">例子展示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tracepath%E6%98%BE%E7%A4%BA%E6%95%B0%E6%8D%AE%E8%A7%A3%E9%87%8A"><span class="toc-number">3.</span> <span class="toc-text">tracepath显示数据解释</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -163,6 +163,13 @@
 </ul>
 <h3 id="例子展示"><a href="#例子展示" class="headerlink" title="例子展示"></a>例子展示</h3><p>Q：<br>现在我想知道通往<code>gaia.cs.umass.edu</code>的最后一个路由，即在你与服务端这条路径上距离<code>gaia.cs.umass.edu</code>最近的一个路由地址，请告诉我吧。<br>A：<br>执行命令<code>tracepath -b gaia.cs.umass.edu</code><br>    结果:在30跳以后，发现仍未到达服务端，于是设定最大跳数为50跳。<br>    <img src="/images/tracepath_fail_result.png"></p>
 <p>执行命令<code>tracepath -b -m 50 gaia.cs.umass.edu</code><br>    结果:成功了，gaia.cs.umass.edu的上一个路由为<code>nscs1bbs1.cs.umass.edu (128.119.240.253)</code><br>    <img src="/images/tracepath_success_result.png"></p>
+<h2 id="tracepath显示数据解释"><a href="#tracepath显示数据解释" class="headerlink" title="tracepath显示数据解释"></a>tracepath显示数据解释</h2><ul>
+<li>显示的毫秒数为<code>rtt</code>(round trip time)环回时间，tracepath向该router发送一个数据包，与此同时，tracepath记录下发送的时刻，router在收到数据包后，向tracepath发送回复，此时再记录下接收到回复的时刻，这段经过的时间便为<code>rtt</code><ul>
+<li>影响<code>rtt</code>的因素有转发处理时间（processing time）、排队时间（queuing time）、数据传输时间（transmission time）、传播时间（propogation time），我们知道，数据包由发出地到目的地所花费的时间为D<sub>nodal</sub> &#x3D; D<sub>proc</sub> + D<sub>queue</sub> + D<sub>tran</sub> + D<sub>prop</sub>,那么<code>rtt</code>的计算方式也大致如此。</li>
+</ul>
+</li>
+<li><code>no reply</code>，可能是数据包发生了丢失，或是router拒绝回复</li>
+</ul>
 
   </div>
 </article>
@@ -188,7 +195,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tracepath%E7%9A%84%E7%94%A8%E9%80%94"><span class="toc-number">1.</span> <span class="toc-text">tracepath的用途</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tracepath%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">tracepath的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90%E5%B1%95%E7%A4%BA"><span class="toc-number">2.1.</span> <span class="toc-text">例子展示</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tracepath%E7%9A%84%E7%94%A8%E9%80%94"><span class="toc-number">1.</span> <span class="toc-text">tracepath的用途</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tracepath%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">tracepath的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90%E5%B1%95%E7%A4%BA"><span class="toc-number">2.1.</span> <span class="toc-text">例子展示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tracepath%E6%98%BE%E7%A4%BA%E6%95%B0%E6%8D%AE%E8%A7%A3%E9%87%8A"><span class="toc-number">3.</span> <span class="toc-text">tracepath显示数据解释</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

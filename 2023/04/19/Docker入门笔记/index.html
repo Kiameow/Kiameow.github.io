@@ -9,7 +9,7 @@
     <meta name="description" content="STEP1：了解两个概念什么是容器Container?容器有以下特点：  是一个镜像的可运行实例（类似于虚拟机）。 能够在本地机器、虚拟机上运行，或者在云端上部署。 轻便性（能够在任何操作系统上运行）。 独立于其他容器，软件、二进制文件和设置都可以是定制化的。  什么是容器镜像Image？镜像有以下特点：  提供了一个独立与本地机器和其他容器的文件系统。 提供运行特定程序所需要的一切–包括依赖，脚">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker入门笔记">
-<meta property="og:url" content="http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:url" content="https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Kia&#39;s Blog">
 <meta property="og:description" content="STEP1：了解两个概念什么是容器Container?容器有以下特点：  是一个镜像的可运行实例（类似于虚拟机）。 能够在本地机器、虚拟机上运行，或者在云端上部署。 轻便性（能够在任何操作系统上运行）。 独立于其他容器，软件、二进制文件和设置都可以是定制化的。  什么是容器镜像Image？镜像有以下特点：  提供了一个独立与本地机器和其他容器的文件系统。 提供运行特定程序所需要的一切–包括依赖，脚">
 <meta property="og:locale">
@@ -66,7 +66,7 @@
      --><!--
        --><li><a href="/archives/">Writing</a></li><!--
      --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/The-Kia">Projects</a></li><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Kiameow">Projects</a></li><!--
      -->
       </ul>
     </span>
@@ -90,17 +90,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&text=Docker入门笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&title=Docker入门笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&is_video=false&description=Docker入门笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Docker入门笔记&body=Check out this article: http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&title=Docker入门笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&title=Docker入门笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&title=Docker入门笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&title=Docker入门笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&name=Docker入门笔记&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&t=Docker入门笔记"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&text=Docker入门笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&title=Docker入门笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&is_video=false&description=Docker入门笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Docker入门笔记&body=Check out this article: https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&title=Docker入门笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&title=Docker入门笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&title=Docker入门笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&title=Docker入门笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&name=Docker入门笔记&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&t=Docker入门笔记"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -176,7 +176,7 @@
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a target="_blank" rel="noopener" href="https://github.com/The-Kia">Projects</a></li>
+          <li><a target="_blank" rel="noopener" href="https://github.com/Kiameow">Projects</a></li>
         
       </ul>
     </div>
@@ -187,17 +187,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&text=Docker入门笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&title=Docker入门笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&is_video=false&description=Docker入门笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Docker入门笔记&body=Check out this article: http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&title=Docker入门笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&title=Docker入门笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&title=Docker入门笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&title=Docker入门笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&name=Docker入门笔记&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&t=Docker入门笔记"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&text=Docker入门笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&title=Docker入门笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&is_video=false&description=Docker入门笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Docker入门笔记&body=Check out this article: https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&title=Docker入门笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&title=Docker入门笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&title=Docker入门笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&title=Docker入门笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&name=Docker入门笔记&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://kiameow.github.io/2023/04/19/Docker%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/&t=Docker入门笔记"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -231,7 +231,7 @@
      --><!--
        --><li><a href="/archives/">Writing</a></li><!--
      --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/The-Kia">Projects</a></li><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Kiameow">Projects</a></li><!--
      -->
       </ul>
     </nav>

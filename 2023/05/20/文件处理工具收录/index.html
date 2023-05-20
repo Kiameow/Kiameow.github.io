@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="cut 用途:获取文件内容的某一列（某几列） 命令范例:cut f 1,2 foo.txt &gt; bar.txt  paste 用途:以列方式合并不同文件 命令范例:paste foo.txt bar.txt &gt; output.txt 效果:123456789101112&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;foo.txt&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;1 21 21 2&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;bar.txt&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;3 4 5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件处理工具收录">
+<meta property="og:url" content="https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/index.html">
+<meta property="og:site_name" content="Kia&#39;s Blog">
+<meta property="og:description" content="cut 用途:获取文件内容的某一列（某几列） 命令范例:cut f 1,2 foo.txt &gt; bar.txt  paste 用途:以列方式合并不同文件 命令范例:paste foo.txt bar.txt &gt; output.txt 效果:123456789101112&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;foo.txt&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;1 21 21 2&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;bar.txt&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;3 4 5">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-05-20T15:00:03.000Z">
+<meta property="article:modified_time" content="2023-05-20T15:24:04.323Z">
+<meta property="article:author" content="Kia">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>文件处理工具收录</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Kiameow">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/05/20/C%E8%AF%AD%E8%A8%80%E5%A4%9A%E6%96%87%E4%BB%B6%E9%A1%B9%E7%9B%AE%E7%BC%96%E8%AF%91/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/&text=文件处理工具收录"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/&title=文件处理工具收录"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/&is_video=false&description=文件处理工具收录"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=文件处理工具收录&body=Check out this article: https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/&title=文件处理工具收录"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/&title=文件处理工具收录"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/&title=文件处理工具收录"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/&title=文件处理工具收录"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/&name=文件处理工具收录&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/&t=文件处理工具收录"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#cut"><span class="toc-number">1.</span> <span class="toc-text">cut</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#paste"><span class="toc-number">2.</span> <span class="toc-text">paste</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sed"><span class="toc-number">3.</span> <span class="toc-text">sed</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#awk"><span class="toc-number">4.</span> <span class="toc-text">awk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shuf"><span class="toc-number">5.</span> <span class="toc-text">shuf</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        文件处理工具收录
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Kia</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-05-20T15:00:03.000Z" itemprop="datePublished">2023-05-20</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="cut"><a href="#cut" class="headerlink" title="cut"></a>cut</h3><ul>
+<li>用途:获取文件内容的某一列（某几列）</li>
+<li>命令范例:<code>cut f 1,2 foo.txt &gt; bar.txt</code></li>
+</ul>
+<h3 id="paste"><a href="#paste" class="headerlink" title="paste"></a>paste</h3><ul>
+<li>用途:以列方式合并不同文件</li>
+<li>命令范例:<code>paste foo.txt bar.txt &gt; output.txt</code></li>
+<li>效果:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">////////foo.txt////////</span><br><span class="line">1 2</span><br><span class="line">1 2</span><br><span class="line">1 2</span><br><span class="line">///////bar.txt////////</span><br><span class="line">3 4 5</span><br><span class="line">3 4 5</span><br><span class="line">3 4 5</span><br><span class="line">///////output.txt///////</span><br><span class="line">1 2 3 4 5</span><br><span class="line">1 2 3 4 5</span><br><span class="line">1 2 3 4 5</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h3><ul>
+<li><p>用途:文件分析,功能很强大,此处只演示文本替换相关功能</p>
+</li>
+<li><p>命令范例1:<code>sed &#39;s/unix/linux/g&#39; obj.txt</code>  </p>
+</li>
+<li><p>命令范例2:<code>sed &#39;s/unix/linux/2&#39; obj.txt</code></p>
+</li>
+<li><p>命令范例3:<code>sed &#39;s/unix/linux/2g&#39; obj.txt</code></p>
+</li>
+<li><p>命令范例4:<code>sed &#39;s/^/HEAD/g&#39; obj.txt</code></p>
+</li>
+<li><p>命令范例2:<code>sed &#39;s/$/TAIL/g&#39; obj.txt</code></p>
+</li>
+<li><p>参数解读: <code>s</code>–替换 | <code>unix</code>为内容关键字 | <code>linux</code>为替换内容 | <code>g</code>为global,替换每行中所有匹配的关键字 | <code>2</code>每行只替换第二个匹配的 | <code>2g</code>每行替换第二个及第二个以后的 | <code>^``$</code>分别为每行开头标志和结尾标志</p>
+</li>
+</ul>
+<h3 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h3><ul>
+<li>用途:文件分析,功能很强大,此处只演示文本删除相关功能</li>
+<li>命令范例:<code>awk &#39;&#123;$2 = &quot;&quot;; print $0&#125;&#39; obj.txt</code></li>
+<li>效果:将第二列替换为””,即删除效果</li>
+</ul>
+<h3 id="shuf"><a href="#shuf" class="headerlink" title="shuf"></a>shuf</h3><ul>
+<li>用途:打乱文本内容（交换行）</li>
+<li>命令范例:<code>shuf obj.txt</code></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/Kiameow">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#cut"><span class="toc-number">1.</span> <span class="toc-text">cut</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#paste"><span class="toc-number">2.</span> <span class="toc-text">paste</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sed"><span class="toc-number">3.</span> <span class="toc-text">sed</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#awk"><span class="toc-number">4.</span> <span class="toc-text">awk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shuf"><span class="toc-number">5.</span> <span class="toc-text">shuf</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/&text=文件处理工具收录"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/&title=文件处理工具收录"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/&is_video=false&description=文件处理工具收录"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=文件处理工具收录&body=Check out this article: https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/&title=文件处理工具收录"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/&title=文件处理工具收录"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/&title=文件处理工具收录"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/&title=文件处理工具收录"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/&name=文件处理工具收录&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://kiameow.github.io/2023/05/20/%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%94%B6%E5%BD%95/&t=文件处理工具收录"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2023
+    Kia
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Kiameow">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

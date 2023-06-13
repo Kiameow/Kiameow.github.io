@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="在自己构建多文件项目的时候经常会遇到一些问题，这个或那个丢了，编译不通过，非常的折磨人，于是乎，有了这篇文章… 多文件项目的体系结构主流的项目体系结构应该是  main.c文件承担核心部分，联结和组织所有功能模块，实现项目的整体流程而不去单独实现某个功能模块。 其余.c文件，如module.c，function.c，实现某个独立的功能模块，以便随时调用，当然.c文件之间也是可以相互调用的。 .h文">
+    <meta name="description" content="在自己构建多文件项目的时候经常会遇到一些问题，这个或那个丢了，编译不通过，非常的折磨人，于是乎，有了这篇文章… 多文件项目的体系结构主流的项目体系结构应该是  main.c文件承担核心部分，联结和组织所有功能模块，实现项目的整体流程而不去单独实现某个功能模块。 其余.c文件，如module.c，function.c，实现某个独立的功能模块，以便随时调用，当然.c文件之间也是可以相互调用的。（通过链">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言多文件项目编译">
 <meta property="og:url" content="https://kiameow.github.io/2023/05/20/C%E8%AF%AD%E8%A8%80%E5%A4%9A%E6%96%87%E4%BB%B6%E9%A1%B9%E7%9B%AE%E7%BC%96%E8%AF%91/index.html">
 <meta property="og:site_name" content="Kia&#39;s Blog">
-<meta property="og:description" content="在自己构建多文件项目的时候经常会遇到一些问题，这个或那个丢了，编译不通过，非常的折磨人，于是乎，有了这篇文章… 多文件项目的体系结构主流的项目体系结构应该是  main.c文件承担核心部分，联结和组织所有功能模块，实现项目的整体流程而不去单独实现某个功能模块。 其余.c文件，如module.c，function.c，实现某个独立的功能模块，以便随时调用，当然.c文件之间也是可以相互调用的。 .h文">
+<meta property="og:description" content="在自己构建多文件项目的时候经常会遇到一些问题，这个或那个丢了，编译不通过，非常的折磨人，于是乎，有了这篇文章… 多文件项目的体系结构主流的项目体系结构应该是  main.c文件承担核心部分，联结和组织所有功能模块，实现项目的整体流程而不去单独实现某个功能模块。 其余.c文件，如module.c，function.c，实现某个独立的功能模块，以便随时调用，当然.c文件之间也是可以相互调用的。（通过链">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-05-20T02:47:42.000Z">
-<meta property="article:modified_time" content="2023-05-20T13:35:16.503Z">
+<meta property="article:modified_time" content="2023-06-13T02:48:53.178Z">
 <meta property="article:author" content="Kia">
 <meta name="twitter:card" content="summary">
     
@@ -105,7 +105,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%96%87%E4%BB%B6%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">多文件项目的体系结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-h%E6%96%87%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">为什么需要.h文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E5%A4%8D%E5%A3%B0%E6%98%8E"><span class="toc-number">3.</span> <span class="toc-text">重复声明</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%96%87%E4%BB%B6%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">多文件项目的体系结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-h%E6%96%87%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">为什么需要.h文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E5%A4%8D%E5%A3%B0%E6%98%8E"><span class="toc-number">3.</span> <span class="toc-text">重复声明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ifndef-define%E5%92%8Cendif"><span class="toc-number">4.</span> <span class="toc-text">ifndef,define和endif</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -148,7 +148,7 @@
 <h2 id="多文件项目的体系结构"><a href="#多文件项目的体系结构" class="headerlink" title="多文件项目的体系结构"></a>多文件项目的体系结构</h2><p>主流的项目体系结构应该是</p>
 <ul>
 <li>main.c文件承担核心部分，联结和组织所有功能模块，实现项目的整体流程而不去单独实现某个功能模块。</li>
-<li>其余.c文件，如module.c，function.c，实现某个独立的功能模块，以便随时调用，当然.c文件之间也是可以相互调用的。</li>
+<li>其余.c文件，如module.c，function.c，实现某个独立的功能模块，以便随时调用，当然.c文件之间也是可以相互调用的。（通过链接编译生成的obj文件，使得各个模块相互可见）</li>
 <li>.h文件，起到接口的作用，.c文件模块的相互调用需要依靠.h文件这个接口。</li>
 </ul>
 <h2 id="为什么需要-h文件"><a href="#为什么需要-h文件" class="headerlink" title="为什么需要.h文件"></a>为什么需要.h文件</h2><p>假如我们现在有两个文件，<code>max.c</code>和<code>main.c</code>，我们要在<code>main.c</code>中调用<code>max.c</code>中的<code>max</code>函数。我们当然可以直接在<code>main.c</code>中写一条<code>max</code>函数的声明语句，来实现这个效果。示例如下：</p>
@@ -156,10 +156,29 @@
 <p>在终端输入<code>gcc -o MAIN *.c; ./MAIN</code>，可以看见结果成功输出。</p>
 <p>但是，考虑一下这种情况，你的<code>max.c</code>文件中不止这一个函数，可能有十多个函数（比如你想重载各种参数类型以提高函数普适性），那每次调用是不是要写十多个函数声明。更糟糕的是，很多模块也需要用到这种得出最大值的功能，你的<code>max.c</code>被多个文件所调用，那是不是又要写好几遍…甚至说，<code>max.c</code>在后续的实验中需要被修改，函数的参数被改动，那又意味着得在每个文件里把函数声明都改一遍…这是极为痛苦的。</p>
 <p>而.h文件的出现，可以解决上述所有问题。<br>你只需要在你的<code>max.h</code>文件中，声明<code>max.c</code>文件中的所有函数，在之后的模块调用中，便只需要<code>#include &quot;max.h&quot;</code>这样一条预处理语句就行啦。</p>
-<p>之后有什么改动，也只需要变变<code>max.h</code>中的函数声明即可。</p>
+<p>之后<code>max.c</code>有什么改动，也只需要改变<code>max.h</code>中相应的函数声明即可。</p>
+<p>结构体&#x2F;类的定义同理，为了方便管理，我们也会将结构体&#x2F;类的定义放在头文件中。</p>
 <h2 id="重复声明"><a href="#重复声明" class="headerlink" title="重复声明"></a>重复声明</h2><p>众所周知，<code>#include .h</code>的工作原理就是把.h文件内容在当前处展开，因此，这可能会造成一些问题。</p>
-<p>函数的重复声明是被允许的，但如果你在.h文件中定义了一个结构体（很常见的做法），那么，当多个.c文件调用了这个.h文件，就会发生报错，因为重复定义了结构体。</p>
-<p>而避免的方法就是在.h文件中设置一个与程序构建无关标志物，如果标志物出现，那么说明该.h文件</p>
+<p>比如你的<code>main.c</code>和<code>max.c</code>中都引用了<code>module.h</code>，之中恰好有你自定义的结构体，那么就有可能造成重复定义的错误。</p>
+<p>函数的重复声明是被允许的，但类或者说结构体（有的编译器不会报错）是不能被重复定义的。而避免的方法就是在.h文件中设置一个与程序构建无关标志物，如果标志物出现，那么说明该.h文件已经被引用过一次，编译器将会自动忽略后续该头文件的展开。</p>
+<h2 id="ifndef-define和endif"><a href="#ifndef-define和endif" class="headerlink" title="ifndef,define和endif"></a>ifndef,define和endif</h2><p>看下面一段程序例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//////////////Sales_data.h///////////////</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> SALES_DATA_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> SALES_DATA_H</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Sales_data</span>&#123;</span></span><br><span class="line">	<span class="type">char</span> bookNo[<span class="number">20</span>];</span><br><span class="line">	<span class="type">unsigned</span> units_sold;</span><br><span class="line">	<span class="type">double</span> revenue;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>这便是头文件保护符功能的使用,通过预处理变量<code>SALES_DATA_H</code>的两种状态:未定义和已定义来判断该头文件是否被引用过一次。’ifndef’便是说如果没有定义过<code>SALES_DATA_H</code>，就<code>define</code>（定义）这样一个变量<code>SALES_DATA_H</code>。</p>
+<p>这样便能解决我们上文提到的问题。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>程序构建需要模块化：</p>
+<ul>
+<li><code>main.c</code> : 核心流程</li>
+<li><code>module1.h</code> : 子功能1声明文件</li>
+<li><code>module1.c</code> : 子功能1 （注意：该文件也需包含<code>module1.h</code>，这样编译器就能检查头文件中的声明与实际定义是否匹配）</li>
+<li><code>struct1.h</code> : 自定义数据结构1定义文件</li>
+<li><code>struct2.h</code> : 自定义数据结构2定义文件</li>
+</ul>
+<p>程序构建也需要规范化：</p>
+<ul>
+<li>使用头文件保护符</li>
+<li>预处理变量的命名是随意的，但一般用大写的类&#x2F;结构体名或文件名代替</li>
+<li>如<code>module1.c</code>和<code>module1.h</code>，相同模块的文件前缀名字相同</li>
+</ul>
 
   </div>
 </article>
@@ -185,7 +204,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%96%87%E4%BB%B6%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">多文件项目的体系结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-h%E6%96%87%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">为什么需要.h文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E5%A4%8D%E5%A3%B0%E6%98%8E"><span class="toc-number">3.</span> <span class="toc-text">重复声明</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%96%87%E4%BB%B6%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">多文件项目的体系结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-h%E6%96%87%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">为什么需要.h文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E5%A4%8D%E5%A3%B0%E6%98%8E"><span class="toc-number">3.</span> <span class="toc-text">重复声明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ifndef-define%E5%92%8Cendif"><span class="toc-number">4.</span> <span class="toc-text">ifndef,define和endif</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

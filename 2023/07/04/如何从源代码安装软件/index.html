@@ -14,7 +14,7 @@
 <meta property="og:description" content="Step1: Download the Source Code Archive File and Unzip it下载源代码的压缩包，通常以.tar.gz的格式出现。 之后使用tar工具进行解压，命令如下： 12345tar -xzf tarfile# -v verbose模式，展示解压过程# -x 提取# -z 同时使用gzip，当被解压文件只有.tar后缀时请忽略这个命令选项# -f 指定文件">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-07-04T03:26:37.000Z">
-<meta property="article:modified_time" content="2023-07-04T03:51:17.324Z">
+<meta property="article:modified_time" content="2023-07-04T04:08:26.809Z">
 <meta property="article:author" content="Kia">
 <meta name="twitter:card" content="summary">
     
@@ -148,7 +148,7 @@
 
 <h2 id="Step2-Check-the-Necessary-Files"><a href="#Step2-Check-the-Necessary-Files" class="headerlink" title="Step2: Check the Necessary Files"></a>Step2: Check the Necessary Files</h2><p>在你解压完成后，进入源文件文件夹，你会看见README文件，或者是INSTALL文件，这些文件将会为你安装软件提供指引，请务必阅读它们。</p>
 <p>之后，运行文件中的configure文件，检查你的系统中是否已经完全具备编译源代码的条件，即依赖文件是否齐全（编译工具，库文件）。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.configure</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">有两个命令选项</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--prefix=[指定安装目录]</span> </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--with指的是安装本文件所依赖的库文件</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./configure</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">有两个命令选项</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--prefix=[指定安装目录]</span> </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">--with指的是安装本文件所依赖的库文件</span></span><br></pre></td></tr></table></figure>
 <p>检查完毕后，会根据你的系统文件存在情况生成makefile（去哪找库文件，如何链接）</p>
 <ul>
 <li>如果检查后发现缺少必要文件怎么办？<br>  使用如下命令，安装缺失文件：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential</span><br></pre></td></tr></table></figure></li>

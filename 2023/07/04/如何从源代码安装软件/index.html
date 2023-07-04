@@ -14,7 +14,7 @@
 <meta property="og:description" content="Step1: Download the Source Code Archive File and Unzip it下载源代码的压缩包，通常以.tar.gz的格式出现。 之后使用tar工具进行解压，命令如下： 12345tar -xzf tarfile# -v verbose模式，展示解压过程# -x 提取# -z 同时使用gzip，当被解压文件只有.tar后缀时请忽略这个命令选项# -f 指定文件">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-07-04T03:26:37.000Z">
-<meta property="article:modified_time" content="2023-07-04T04:08:26.809Z">
+<meta property="article:modified_time" content="2023-07-04T05:28:13.890Z">
 <meta property="article:author" content="Kia">
 <meta name="twitter:card" content="summary">
     
@@ -103,7 +103,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Step1-Download-the-Source-Code-Archive-File-and-Unzip-it"><span class="toc-number">1.</span> <span class="toc-text">Step1: Download the Source Code Archive File and Unzip it</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step2-Check-the-Necessary-Files"><span class="toc-number">2.</span> <span class="toc-text">Step2: Check the Necessary Files</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step3-Start-Compiling-and-Install"><span class="toc-number">3.</span> <span class="toc-text">Step3: Start Compiling and Install</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Can%E2%80%99t-Launch-Your-App"><span class="toc-number">4.</span> <span class="toc-text">Can’t Launch Your App?</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Step1-Download-the-Source-Code-Archive-File-and-Unzip-it"><span class="toc-number">1.</span> <span class="toc-text">Step1: Download the Source Code Archive File and Unzip it</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step2-Check-the-Necessary-Files"><span class="toc-number">2.</span> <span class="toc-text">Step2: Check the Necessary Files</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step3-Start-Compiling-and-Install"><span class="toc-number">3.</span> <span class="toc-text">Step3: Start Compiling and Install</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Can%E2%80%99t-Launch-Your-App"><span class="toc-number">4.</span> <span class="toc-text">Can’t Launch Your App?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">5.</span> <span class="toc-text">优缺点</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -155,10 +155,15 @@
 </ul>
 <h2 id="Step3-Start-Compiling-and-Install"><a href="#Step3-Start-Compiling-and-Install" class="headerlink" title="Step3: Start Compiling and Install"></a>Step3: Start Compiling and Install</h2><p>生成对应的<code>makefile</code>后，在源文件文件夹下，使用<code>make</code>命令，进行编译。</p>
 <p>编译阶段可能会花费较长的时间，请耐心等待。如果你拥有多核CPU，可以使用<code>make -j</code>加快编译速度。</p>
-<p>接着，执行<code>sudo make install</code>安装软件。</p>
+<p><del>接着，执行<code>sudo make install</code>安装软件。</del><br>接着使用<code>checkinstall</code>而不是<code>make install</code>，<code>checkinstall</code>是一款软件，如果没有请安装它，它能够打包你将要安装的软件成为<code>.deb</code>包，以便后续的管理。</p>
+<p>这样一来，之后你想要删除这个软件，只需运行<code>sudo dpkg -r 软件名.deb</code>，而无需手动一个个找文件删除。（运行了<code>makeinstall</code>之后，仍然可以使用<code>checkinstall</code>进行打包）</p>
 <h2 id="Can’t-Launch-Your-App"><a href="#Can’t-Launch-Your-App" class="headerlink" title="Can’t Launch Your App?"></a>Can’t Launch Your App?</h2><p>在安装完成后，启动软件却发现仍然缺少一些必要的运行库，如何解决？<br>执行：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ldconfig</span><br></pre></td></tr></table></figure>
 <p>会帮助你安装这些缺失的文件。</p>
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><ul>
+<li>优点：使用源代码安装，可以为你提供对软件的完全控制，以及最新版本（包管理器收录必然是滞后的）</li>
+<li>缺点：麻烦，配置时出错很难调试，并且无法自动升级，有新的版本就需要重装。而包管理器一条命令就可以完成上述工作。</li>
+</ul>
 
   </div>
 </article>
@@ -184,7 +189,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Step1-Download-the-Source-Code-Archive-File-and-Unzip-it"><span class="toc-number">1.</span> <span class="toc-text">Step1: Download the Source Code Archive File and Unzip it</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step2-Check-the-Necessary-Files"><span class="toc-number">2.</span> <span class="toc-text">Step2: Check the Necessary Files</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step3-Start-Compiling-and-Install"><span class="toc-number">3.</span> <span class="toc-text">Step3: Start Compiling and Install</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Can%E2%80%99t-Launch-Your-App"><span class="toc-number">4.</span> <span class="toc-text">Can’t Launch Your App?</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Step1-Download-the-Source-Code-Archive-File-and-Unzip-it"><span class="toc-number">1.</span> <span class="toc-text">Step1: Download the Source Code Archive File and Unzip it</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step2-Check-the-Necessary-Files"><span class="toc-number">2.</span> <span class="toc-text">Step2: Check the Necessary Files</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step3-Start-Compiling-and-Install"><span class="toc-number">3.</span> <span class="toc-text">Step3: Start Compiling and Install</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Can%E2%80%99t-Launch-Your-App"><span class="toc-number">4.</span> <span class="toc-text">Can’t Launch Your App?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">5.</span> <span class="toc-text">优缺点</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

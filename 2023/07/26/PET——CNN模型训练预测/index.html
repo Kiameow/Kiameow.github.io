@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="利用框架构建数据集123456789101112131415161718192021222324252627282930DATA_CACHE &#x3D; &amp;#123;&amp;#125;class XunFeiDataset(Dataset):    def __init__(self, img_path, transform&#x3D;None):        self.img_path &#x3D; img_path">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PET——CNN模型训练预测">
+<meta property="og:url" content="https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/index.html">
+<meta property="og:site_name" content="Kia&#39;s Blog">
+<meta property="og:description" content="利用框架构建数据集123456789101112131415161718192021222324252627282930DATA_CACHE &#x3D; &amp;#123;&amp;#125;class XunFeiDataset(Dataset):    def __init__(self, img_path, transform&#x3D;None):        self.img_path &#x3D; img_path">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-07-26T13:22:53.000Z">
+<meta property="article:modified_time" content="2023-07-26T13:26:59.711Z">
+<meta property="article:author" content="Kia">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>PET——CNN模型训练预测</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Kiameow">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/07/21/CV%E5%AD%A6%E4%B9%A0/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/&text=PET——CNN模型训练预测"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/&title=PET——CNN模型训练预测"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/&is_video=false&description=PET——CNN模型训练预测"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=PET——CNN模型训练预测&body=Check out this article: https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/&title=PET——CNN模型训练预测"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/&title=PET——CNN模型训练预测"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/&title=PET——CNN模型训练预测"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/&title=PET——CNN模型训练预测"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/&name=PET——CNN模型训练预测&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/&t=PET——CNN模型训练预测"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E6%A1%86%E6%9E%B6%E6%9E%84%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">利用框架构建数据集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%B9%BF-%E6%9E%84%E5%BB%BA%E8%AE%AD%E7%BB%83%E9%9B%86-%E9%AA%8C%E8%AF%81%E9%9B%86-%E6%B5%8B%E8%AF%95%E9%9B%86"><span class="toc-number">2.</span> <span class="toc-text">数据增广  构建训练集|验证集|测试集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BACNN%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">构建CNN模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="toc-number">4.</span> <span class="toc-text">模型训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C%E9%A2%84%E6%B5%8B"><span class="toc-number">5.</span> <span class="toc-text">结果预测</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        PET——CNN模型训练预测
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Kia</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-07-26T13:22:53.000Z" itemprop="datePublished">2023-07-26</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="利用框架构建数据集"><a href="#利用框架构建数据集" class="headerlink" title="利用框架构建数据集"></a>利用框架构建数据集</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">DATA_CACHE = &#123;&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">XunFeiDataset</span>(<span class="title class_ inherited__">Dataset</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, img_path, transform=<span class="literal">None</span></span>):</span><br><span class="line">        self.img_path = img_path</span><br><span class="line">        <span class="keyword">if</span> transform <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            self.transform = transform</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.transform = <span class="literal">None</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self, index</span>):</span><br><span class="line">        <span class="keyword">if</span> self.img_path[index] <span class="keyword">in</span> DATA_CACHE:</span><br><span class="line">            img = DATA_CACHE[self.img_path[index]]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            img = nib.load(self.img_path[index]) </span><br><span class="line">            img = img.dataobj[:,:,:, <span class="number">0</span>]</span><br><span class="line">            DATA_CACHE[self.img_path[index]] = img</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 随机选择一些通道            </span></span><br><span class="line">        idx = np.random.choice(<span class="built_in">range</span>(img.shape[-<span class="number">1</span>]), <span class="number">50</span>)</span><br><span class="line">        img = img[:, :, idx]</span><br><span class="line">        img = img.astype(np.float32)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.transform <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            img = self.transform(image = img)[<span class="string">&#x27;image&#x27;</span>]</span><br><span class="line">        </span><br><span class="line">        img = img.transpose([<span class="number">2</span>,<span class="number">0</span>,<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">return</span> img,torch.from_numpy(np.array(<span class="built_in">int</span>(<span class="string">&#x27;NC&#x27;</span> <span class="keyword">in</span> self.img_path[index])))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(self.img_path)</span><br></pre></td></tr></table></figure>
+<p>上述代码通过对 <code>Pytorch</code> 框架中的基本数据集进行继承修改，构建了PET项目对应的数据集，方便后续在框架内进行操作。</p>
+<h2 id="数据增广-构建训练集-验证集-测试集"><a href="#数据增广-构建训练集-验证集-测试集" class="headerlink" title="数据增广  构建训练集|验证集|测试集"></a>数据增广  构建训练集|验证集|测试集</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> albumentations <span class="keyword">as</span> A</span><br><span class="line">train_loader = torch.utils.data.DataLoader(</span><br><span class="line">    XunFeiDataset(train_path[:-<span class="number">10</span>],</span><br><span class="line">            A.Compose([</span><br><span class="line">            A.RandomRotate90(),</span><br><span class="line">            A.RandomCrop(<span class="number">120</span>, <span class="number">120</span>),</span><br><span class="line">            A.HorizontalFlip(p=<span class="number">0.5</span>),</span><br><span class="line">            A.RandomBrightnessContrast(p=<span class="number">0.5</span>),</span><br><span class="line">        ])</span><br><span class="line">    ), batch_size=<span class="number">2</span>, shuffle=<span class="literal">True</span>, num_workers=<span class="number">1</span>, pin_memory=<span class="literal">False</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">val_loader = torch.utils.data.DataLoader(</span><br><span class="line">    XunFeiDataset(train_path[-<span class="number">10</span>:],</span><br><span class="line">            A.Compose([</span><br><span class="line">            A.RandomCrop(<span class="number">120</span>, <span class="number">120</span>),</span><br><span class="line">        ])</span><br><span class="line">    ), batch_size=<span class="number">2</span>, shuffle=<span class="literal">False</span>, num_workers=<span class="number">1</span>, pin_memory=<span class="literal">False</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">test_loader = torch.utils.data.DataLoader(</span><br><span class="line">    XunFeiDataset(test_path,</span><br><span class="line">            A.Compose([</span><br><span class="line">            A.RandomCrop(<span class="number">128</span>, <span class="number">128</span>),</span><br><span class="line">            A.HorizontalFlip(p=<span class="number">0.5</span>),</span><br><span class="line">            A.RandomBrightnessContrast(p=<span class="number">0.5</span>),</span><br><span class="line">        ])</span><br><span class="line">    ), batch_size=<span class="number">2</span>, shuffle=<span class="literal">False</span>, num_workers=<span class="number">1</span>, pin_memory=<span class="literal">False</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>通过Albumentation中的方法对图像进行重组，如<code>RandomCrop</code>方法随机裁取部分图像作为输入，生成类似数据集中的图片进行数据增广，减少了过拟合现象的发生概率，增强了模型的鲁棒性。<br>（demo中的 <code>A.RandomContrast</code> 方法已经被弃用，选择换用&#96;A.RandomBrightnessContrast&#96;&#96;）</p>
+<h2 id="构建CNN模型"><a href="#构建CNN模型" class="headerlink" title="构建CNN模型"></a>构建CNN模型</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">XunFeiNet</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(XunFeiNet, self).__init__()</span><br><span class="line">                </span><br><span class="line">        model = models.resnet50(<span class="literal">True</span>)</span><br><span class="line">        model.conv1 = torch.nn.Conv2d(<span class="number">50</span>, <span class="number">64</span>, kernel_size=(<span class="number">7</span>, <span class="number">7</span>), stride=(<span class="number">2</span>, <span class="number">2</span>), padding=(<span class="number">3</span>, <span class="number">3</span>), bias=<span class="literal">False</span>)</span><br><span class="line">        model.avgpool = nn.AdaptiveAvgPool2d(<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># model.fc = nn.Linear(512, 2)</span></span><br><span class="line">        model.fc = nn.Linear(<span class="number">2048</span>, <span class="number">2</span>)</span><br><span class="line">        self.resnet = model</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, img</span>):        </span><br><span class="line">        out = self.resnet(img)</span><br><span class="line">        <span class="keyword">return</span> out</span><br><span class="line">        </span><br><span class="line">model = XunFeiNet()</span><br><span class="line">model = model.to(<span class="string">&#x27;cpu&#x27;</span>)</span><br><span class="line">criterion = nn.CrossEntropyLoss().to(<span class="string">&#x27;cpu&#x27;</span>)</span><br><span class="line">optimizer = torch.optim.AdamW(model.parameters(), <span class="number">0.001</span>)</span><br></pre></td></tr></table></figure>
+<p>通过继承Pytorch框架中的基本模型，构建出项目对应模型，此处选用resNet50，注意，resNet50由于层数更多，第一层的输入口个数为2048个而非512，故需要改变原代码 <code>model.fc</code> 处参数。</p>
+<h2 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">train</span>(<span class="params">train_loader, model, criterion, optimizer</span>):</span><br><span class="line">    model.train()</span><br><span class="line">    train_loss = <span class="number">0.0</span></span><br><span class="line">    <span class="keyword">for</span> i, (<span class="built_in">input</span>, target) <span class="keyword">in</span> <span class="built_in">enumerate</span>(train_loader):</span><br><span class="line">        <span class="built_in">input</span> = <span class="built_in">input</span>.to(<span class="string">&#x27;cpu&#x27;</span>)</span><br><span class="line">        target = target.to(<span class="string">&#x27;cpu&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        output = model(<span class="built_in">input</span>)</span><br><span class="line">        loss = criterion(output, target)</span><br><span class="line"></span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> i % <span class="number">20</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(loss.item())</span><br><span class="line">            </span><br><span class="line">        train_loss += loss.item()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> train_loss/<span class="built_in">len</span>(train_loader)</span><br><span class="line">            </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">validate</span>(<span class="params">val_loader, model, criterion</span>):</span><br><span class="line">    model.<span class="built_in">eval</span>()</span><br><span class="line">    val_acc = <span class="number">0.0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        <span class="keyword">for</span> i, (<span class="built_in">input</span>, target) <span class="keyword">in</span> <span class="built_in">enumerate</span>(val_loader):</span><br><span class="line">            <span class="built_in">input</span> = <span class="built_in">input</span>.to(<span class="string">&#x27;cpu&#x27;</span>)</span><br><span class="line">            target = target.to(<span class="string">&#x27;cpu&#x27;</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># compute output</span></span><br><span class="line">            output = model(<span class="built_in">input</span>)</span><br><span class="line">            loss = criterion(output, target)</span><br><span class="line">            </span><br><span class="line">            val_acc += (output.argmax(<span class="number">1</span>) == target).<span class="built_in">sum</span>().item()</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> val_acc / <span class="built_in">len</span>(val_loader.dataset)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> _  <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">    train_loss = train(train_loader, model, criterion, optimizer)</span><br><span class="line">    val_acc  = validate(val_loader, model, criterion)</span><br><span class="line">    train_acc = validate(train_loader, model, criterion)</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">print</span>(train_loss, train_acc, val_acc)</span><br></pre></td></tr></table></figure>
+<p>GPT：这段代码用于使用PyTorch在数据集上训练和评估神经网络模型。它包含两个函数：<code>train</code>和<code>validate</code>，分别用于处理训练和验证步骤。代码在三个epochs中运行这些步骤，并在每个epoch后打印训练损失、训练准确率和验证准确率。</p>
+<p>让我们逐步解释代码：</p>
+<ol>
+<li><p><code>def train(train_loader, model, criterion, optimizer)</code>: 此函数使用给定的<code>train_loader</code>执行一个epoch的训练，其中<code>train_loader</code>是包含训练数据的PyTorch DataLoader。该函数有四个参数：</p>
+<ul>
+<li><code>train_loader</code>：包含训练数据的PyTorch DataLoader。</li>
+<li><code>model</code>：待训练的神经网络模型。</li>
+<li><code>criterion</code>：用于计算损失的损失函数。</li>
+<li><code>optimizer</code>：用于在训练过程中更新模型参数的优化算法。</li>
+</ul>
+<p>函数内部：</p>
+<ul>
+<li><code>model.train()</code> 将模型设置为训练模式，启用训练过程中的dropout和批归一化等功能。</li>
+<li>然后，函数遍历<code>train_loader</code>中的批次数据。</li>
+<li>每个批次包含输入数据（<code>input</code>）和对应的目标标签（<code>target</code>）。</li>
+<li>将<code>input</code>和<code>target</code>张量移到CPU设备，使用<code>.to(&#39;cpu&#39;)</code>将计算放在CPU上（不使用GPU）。</li>
+<li>使用模型对输入数据进行预测，得到输出（<code>output</code>）。</li>
+<li>使用提供的<code>criterion</code>计算预测的<code>output</code>与实际的<code>target</code>之间的损失。</li>
+<li>使用<code>optimizer.zero_grad()</code>将优化器的梯度重置为零。</li>
+<li>使用<code>loss.backward()</code>进行反向传播计算梯度。</li>
+<li>使用<code>optimizer.step()</code>更新模型的参数。</li>
+<li>将当前批次的损失累积到<code>train_loss</code>中。</li>
+<li>处理完所有批次后，计算并返回整个epoch的平均训练损失。</li>
+</ul>
+</li>
+<li><p><code>def validate(val_loader, model, criterion)</code>: 此函数使用给定的<code>val_loader</code>执行验证步骤，其中<code>val_loader</code>是包含验证数据的PyTorch DataLoader。该函数有三个参数：</p>
+<ul>
+<li><code>val_loader</code>：包含验证数据的PyTorch DataLoader。</li>
+<li><code>model</code>：经过训练的神经网络模型。</li>
+<li><code>criterion</code>：用于计算损失的损失函数。</li>
+</ul>
+<p>函数内部：</p>
+<ul>
+<li><code>model.eval()</code> 将模型设置为评估模式，禁用评估过程中的dropout等功能。</li>
+<li>然后，函数遍历<code>val_loader</code>中的批次数据。</li>
+<li>使用模型对输入数据进行预测得到输出（<code>output</code>）。</li>
+<li>通过比较预测的输出（<code>output.argmax(1)</code>）与目标标签（<code>target</code>）来计算验证准确率。如果预测的类索引与目标类索引匹配，则视为正确预测。</li>
+<li>将验证准确率累积到<code>val_acc</code>中。</li>
+<li>处理完所有批次后，计算并返回整个数据集的平均验证准确率。</li>
+</ul>
+</li>
+<li><p>代码然后在三个epochs中运行训练和评估的循环，使用<code>for _ in range(3)</code>。</p>
+<ul>
+<li><code>train_loss</code>、<code>train_acc</code>和<code>val_acc</code>是变量，用于分别存储每个epoch的训练损失、训练准确率和验证准确率。</li>
+<li>在每个epoch中，调用<code>train</code>函数在训练数据（<code>train_loader</code>）上执行训练步骤。</li>
+<li>调用<code>validate</code>函数两次：一次在训练数据（<code>train_loader</code>），一次在验证数据（<code>val_loader</code>），分别计算训练准确率和验证准确率。</li>
+</ul>
+</li>
+<li><p>每个epoch结束后，打印该epoch的平均训练损失（<code>train_loss</code>）、训练准确率（<code>train_acc</code>）和验证准确率（<code>val_acc</code>）。</p>
+</li>
+</ol>
+<p>该代码的目标是在训练数据上训练模型，并在验证数据上评估模型的性能，同时跟踪训练过程中的损失和准确率。这样的训练和评估循环常用于监控模型的进展，并根据验证性能决定何时停止训练。</p>
+<h2 id="结果预测"><a href="#结果预测" class="headerlink" title="结果预测"></a>结果预测</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">test_loader, model, criterion</span>):</span><br><span class="line">    model.<span class="built_in">eval</span>()</span><br><span class="line">    val_acc = <span class="number">0.0</span></span><br><span class="line">    </span><br><span class="line">    test_pred = []</span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        <span class="keyword">for</span> i, (<span class="built_in">input</span>, target) <span class="keyword">in</span> <span class="built_in">enumerate</span>(test_loader):</span><br><span class="line">            <span class="built_in">input</span> = <span class="built_in">input</span>.to(<span class="string">&#x27;cpu&#x27;</span>)</span><br><span class="line">            target = target.to(<span class="string">&#x27;cpu&#x27;</span>)</span><br><span class="line"></span><br><span class="line">            output = model(<span class="built_in">input</span>)</span><br><span class="line">            test_pred.append(output.data.cpu().numpy())</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> np.vstack(test_pred)</span><br><span class="line">    </span><br><span class="line">pred = <span class="literal">None</span></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    <span class="keyword">if</span> pred <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        pred = predict(test_loader, model, criterion)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        pred += predict(test_loader, model, criterion)</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/Kiameow">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E6%A1%86%E6%9E%B6%E6%9E%84%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">利用框架构建数据集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%B9%BF-%E6%9E%84%E5%BB%BA%E8%AE%AD%E7%BB%83%E9%9B%86-%E9%AA%8C%E8%AF%81%E9%9B%86-%E6%B5%8B%E8%AF%95%E9%9B%86"><span class="toc-number">2.</span> <span class="toc-text">数据增广  构建训练集|验证集|测试集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BACNN%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">构建CNN模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="toc-number">4.</span> <span class="toc-text">模型训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C%E9%A2%84%E6%B5%8B"><span class="toc-number">5.</span> <span class="toc-text">结果预测</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/&text=PET——CNN模型训练预测"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/&title=PET——CNN模型训练预测"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/&is_video=false&description=PET——CNN模型训练预测"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=PET——CNN模型训练预测&body=Check out this article: https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/&title=PET——CNN模型训练预测"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/&title=PET——CNN模型训练预测"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/&title=PET——CNN模型训练预测"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/&title=PET——CNN模型训练预测"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/&name=PET——CNN模型训练预测&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://kiameow.github.io/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/&t=PET——CNN模型训练预测"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2023
+    Kia
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Kiameow">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

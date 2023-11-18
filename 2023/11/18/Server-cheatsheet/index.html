@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="sshssh远程登录ssh -p port_number username@ip_addressssh -p 10000 root@11.11.11.11 不用-p则默认为22端口 将服务器端口映射到本地端口ssh -CNgv -L local_port:127.0.0.1:port username@ip_address -p 22 比如在服务器上启用了hugo server，你想要看看页面的效">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Server cheatsheet">
+<meta property="og:url" content="https://kiameow.github.io/2023/11/18/Server-cheatsheet/index.html">
+<meta property="og:site_name" content="Kia&#39;s Blog">
+<meta property="og:description" content="sshssh远程登录ssh -p port_number username@ip_addressssh -p 10000 root@11.11.11.11 不用-p则默认为22端口 将服务器端口映射到本地端口ssh -CNgv -L local_port:127.0.0.1:port username@ip_address -p 22 比如在服务器上启用了hugo server，你想要看看页面的效">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-11-18T07:57:54.000Z">
+<meta property="article:modified_time" content="2023-11-18T08:24:37.146Z">
+<meta property="article:author" content="Kia">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Server cheatsheet</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Kiameow">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/07/26/PET%E2%80%94%E2%80%94CNN%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E9%A2%84%E6%B5%8B/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kiameow.github.io/2023/11/18/Server-cheatsheet/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kiameow.github.io/2023/11/18/Server-cheatsheet/&text=Server cheatsheet"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kiameow.github.io/2023/11/18/Server-cheatsheet/&title=Server cheatsheet"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kiameow.github.io/2023/11/18/Server-cheatsheet/&is_video=false&description=Server cheatsheet"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Server cheatsheet&body=Check out this article: https://kiameow.github.io/2023/11/18/Server-cheatsheet/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kiameow.github.io/2023/11/18/Server-cheatsheet/&title=Server cheatsheet"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kiameow.github.io/2023/11/18/Server-cheatsheet/&title=Server cheatsheet"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kiameow.github.io/2023/11/18/Server-cheatsheet/&title=Server cheatsheet"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kiameow.github.io/2023/11/18/Server-cheatsheet/&title=Server cheatsheet"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kiameow.github.io/2023/11/18/Server-cheatsheet/&name=Server cheatsheet&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://kiameow.github.io/2023/11/18/Server-cheatsheet/&t=Server cheatsheet"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ssh"><span class="toc-number">1.</span> <span class="toc-text">ssh</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ssh%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95"><span class="toc-number">1.1.</span> <span class="toc-text">ssh远程登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E5%88%B0%E6%9C%AC%E5%9C%B0%E7%AB%AF%E5%8F%A3"><span class="toc-number">1.2.</span> <span class="toc-text">将服务器端口映射到本地端口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scp"><span class="toc-number">2.</span> <span class="toc-text">scp</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#scp%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="toc-number">2.1.</span> <span class="toc-text">scp文件上传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#scp%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD"><span class="toc-number">2.2.</span> <span class="toc-text">scp文件下载</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Server cheatsheet
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Kia</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-11-18T07:57:54.000Z" itemprop="datePublished">2023-11-18</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h2><h3 id="ssh远程登录"><a href="#ssh远程登录" class="headerlink" title="ssh远程登录"></a>ssh远程登录</h3><p><code>ssh -p port_number username@ip_address</code><br><code>ssh -p 10000 root@11.11.11.11</code></p>
+<p>不用-p则默认为22端口</p>
+<h3 id="将服务器端口映射到本地端口"><a href="#将服务器端口映射到本地端口" class="headerlink" title="将服务器端口映射到本地端口"></a>将服务器端口映射到本地端口</h3><p><code>ssh -CNgv -L local_port:127.0.0.1:port username@ip_address -p 22</code></p>
+<p>比如在服务器上启用了hugo server，你想要看看页面的效果如何<br>hugo server 默认启动在端口1313<br><code>ssh -CNgv -L 1313:127.0.0.1:1313 root@11.11.11.11 -p 10000</code><br>此处ssh连接端口为10000,根据个人配置来，改动是出于安全性考虑</p>
+<h2 id="scp"><a href="#scp" class="headerlink" title="scp"></a>scp</h2><h3 id="scp文件上传"><a href="#scp文件上传" class="headerlink" title="scp文件上传"></a>scp文件上传</h3><p><code>scp /path/local_file username@ip_address:/path</code><br><code>scp /var/www/test.php  codinglog@192.168.0.101:/var/www/ </code></p>
+<h3 id="scp文件下载"><a href="#scp文件下载" class="headerlink" title="scp文件下载"></a>scp文件下载</h3><p><code>scp username@ip_address:/path/filename /tmp/local_destination</code><br><code>scp root@11.11.11.11:/home/user/text /tmp/local_destination</code></p>
+<p>上传、下载文件夹则加上-r选项</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/Kiameow">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ssh"><span class="toc-number">1.</span> <span class="toc-text">ssh</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ssh%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95"><span class="toc-number">1.1.</span> <span class="toc-text">ssh远程登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E5%88%B0%E6%9C%AC%E5%9C%B0%E7%AB%AF%E5%8F%A3"><span class="toc-number">1.2.</span> <span class="toc-text">将服务器端口映射到本地端口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scp"><span class="toc-number">2.</span> <span class="toc-text">scp</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#scp%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="toc-number">2.1.</span> <span class="toc-text">scp文件上传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#scp%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD"><span class="toc-number">2.2.</span> <span class="toc-text">scp文件下载</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://kiameow.github.io/2023/11/18/Server-cheatsheet/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://kiameow.github.io/2023/11/18/Server-cheatsheet/&text=Server cheatsheet"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://kiameow.github.io/2023/11/18/Server-cheatsheet/&title=Server cheatsheet"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://kiameow.github.io/2023/11/18/Server-cheatsheet/&is_video=false&description=Server cheatsheet"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Server cheatsheet&body=Check out this article: https://kiameow.github.io/2023/11/18/Server-cheatsheet/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://kiameow.github.io/2023/11/18/Server-cheatsheet/&title=Server cheatsheet"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://kiameow.github.io/2023/11/18/Server-cheatsheet/&title=Server cheatsheet"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://kiameow.github.io/2023/11/18/Server-cheatsheet/&title=Server cheatsheet"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://kiameow.github.io/2023/11/18/Server-cheatsheet/&title=Server cheatsheet"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://kiameow.github.io/2023/11/18/Server-cheatsheet/&name=Server cheatsheet&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://kiameow.github.io/2023/11/18/Server-cheatsheet/&t=Server cheatsheet"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2023
+    Kia
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/Kiameow">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

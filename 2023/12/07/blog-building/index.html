@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://kiameow.github.io/certbot.png">
 <meta property="og:image" content="https://kiameow.github.io/certbot2.png">
 <meta property="article:published_time" content="2023-12-07T07:44:19.000Z">
-<meta property="article:modified_time" content="2023-12-07T16:13:21.428Z">
+<meta property="article:modified_time" content="2023-12-07T16:14:58.666Z">
 <meta property="article:author" content="Kia">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://kiameow.github.io/certbot.png">
@@ -174,9 +174,9 @@
 <h2 id="给域名添加证书实现https"><a href="#给域名添加证书实现https" class="headerlink" title="给域名添加证书实现https"></a>给域名添加证书实现https</h2><p>这一步很简单，因为有非常厉害的工具 —— <a target="_blank" rel="noopener" href="https://certbot.eff.org/">certbot</a> , 可以自动申请证书，并修改你的服务器中间件(nginx|apache)的配置，开启SSL, 并且证书到期了还能给你自动更新，简直不要太方便。</p>
 <p>当然，记得在运行certbot脚本前在云服务器的管理面板开启443端口用于SSL服务。</p>
 <p>进入<a target="_blank" rel="noopener" href="https://certbot.eff.org/">certbot官网</a>后，选择你的中间件和操作系统，接着稍稍等待页面的加载，下方就会出现相应的操作指引。</p>
-<p><img src="/certbot.png" alt="certbot"></p>
+<p><img src="/./certbot.png" alt="certbot"></p>
 <p>如下图，这里选的是<code>software--nginx</code> 和 <code>system--ubuntu20</code></p>
-<p><img src="/certbot2.png" alt="Alt text"></p>
+<p><img src="/./certbot2.png" alt="Alt text"></p>
 <p>接着跟着指引一步步来就行啦</p>
 <p>在浏览器输入你的域名，看看是否大功告成</p>
 

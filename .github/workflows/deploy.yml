@@ -2,7 +2,7 @@ name: Deploy Astro Site Manually
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   workflow_dispatch:
 
 # 必须授予 Pages 所需的权限

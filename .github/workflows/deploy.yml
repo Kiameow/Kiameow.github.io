@@ -1,44 +1,66 @@
-name: Deploy to GitHub Pages Manually
+name: Deploy Astro Site Manually
 
 on:
   push:
     branches: [ main ]
   workflow_dispatch:
 
+# 必须授予 Pages 所需的权限
 permissions:
+  contents: read
   pages: write
   id-token: write
-  contents: read
+
+# 并发控制：同一时间只允许一个部署运行
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Install Dependencies
-        run: npm ci
-      - name: Build with Astro
-        run: npm run build
-      - name: Create .nojekyll in output
-        # 这是最关键的一步：在 Astro 生成的 dist/ 目录下创建文件
-        run: touch ./dist/.nojekyll
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist
-
-  deploy:
-    needs: build
+  build-and-deploy:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    
     steps:
+      # 1. 检出代码
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      # 2. 设置 Node.js 环境
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'  # 使用与本地开发一致的 Node 版本
+          cache: 'npm'
+      
+      # 3. 安装依赖（使用 ci 命令确保与 lockfile 一致）
+      - name: Install dependencies
+        run: npm ci
+      
+      # 4. 构建站点（执行 package.json 中的 build 脚本）
+      - name: Build with Astro
+        run: npm run build
+      
+      # 5. 关键：在输出目录创建 .nojekyll 文件
+      - name: Disable Jekyll processing
+        run: |
+          # 默认 Astro 输出到 ./dist，请根据你的配置调整
+          touch ./dist/.nojekyll
+          echo ".nojekyll file created"
+      
+      # 6. （可选）验证构建输出
+      - name: List build output
+        run: ls -la ./dist/
+      
+      # 7. 上传构建产物为 Pages Artifact
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist/  # 上传 dist 目录的所有内容
+      
+      # 8. 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

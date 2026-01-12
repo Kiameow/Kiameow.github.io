@@ -32,6 +32,10 @@ import {
   SiMysql,
   SiWordpress,
   SiCpanel,
+  SiUnity,
+  SiJavascript,
+  SiPython,
+  SiCplusplus,
 } from 'react-icons/si'
 import {
   Shield,
@@ -86,6 +90,10 @@ export const iconMap: { [key: string]: IconType } = {
   'simple-icons:mysql': SiMysql,
   'simple-icons:wordpress': SiWordpress,
   'simple-icons:cpanel': SiCpanel,
+  'simple-icons:unity': SiUnity,
+  'simple-icons:js': SiJavascript,
+  'simple-icons:python': SiPython,
+  'simple-icons:cpp': SiCplusplus,
 }
 
 export function getIcon(logo: string): IconType {

@@ -6,6 +6,7 @@ import { getIcon } from './SkillsIconLoader'
 type Category = {
   text: string
   logo: string
+  featured?: boolean 
 }
 
 type Technologies = {
@@ -14,12 +15,13 @@ type Technologies = {
   'Automation & Orchestration': Category[]
   'Cloud & Infrastructure': Category[]
   'Monitoring & Tools': Category[]
+  'Programming Language': Category[]
 }
 
 // Technologies based on CV
 const technologies: Technologies = {
   'Systems & Virtualization': [
-    { text: 'Linux', logo: 'simple-icons:linux' },
+    { text: 'Linux', logo: 'simple-icons:linux', featured: true },
     { text: 'Ubuntu', logo: 'mdi:ubuntu' },
     { text: 'Debian', logo: 'simple-icons:debian' },
     { text: 'Windows Server', logo: 'mdi:windows' },
@@ -43,8 +45,8 @@ const technologies: Technologies = {
     { text: 'Terraform', logo: 'simple-icons:terraform' },
     { text: 'Puppet', logo: 'simple-icons:puppet' },
     { text: 'SALT', logo: 'simple-icons:saltproject' },
-    { text: 'Bash', logo: 'lucide:terminal' },
-    { text: 'Git', logo: 'mdi:git' },
+    { text: 'Bash', logo: 'lucide:terminal', featured: true },
+    { text: 'Git', logo: 'mdi:git', featured: true },
     { text: 'Flux', logo: 'simple-icons:flux' },
     { text: 'Rancher', logo: 'simple-icons:rancher' },
   ],
@@ -64,10 +66,16 @@ const technologies: Technologies = {
     { text: 'Asterisk', logo: 'simple-icons:asterisk' },
     { text: 'Apache', logo: 'simple-icons:apache' },
     { text: 'Nginx', logo: 'simple-icons:nginx' },
-    { text: 'MySQL', logo: 'simple-icons:mysql' },
+    { text: 'MySQL', logo: 'simple-icons:mysql', featured: true },
     { text: 'WordPress', logo: 'simple-icons:wordpress' },
     { text: 'cPanel', logo: 'simple-icons:cpanel' },
+    { text: 'Unity', logo: 'simple-icons:unity', featured: true },
   ],
+  'Programming Language': [
+    { text: 'Python', logo: 'simple-icons:python', featured: true },
+    { text: 'Cpp', logo: 'simple-icons:cpp', featured: true },
+    { text: 'JavaScript', logo: 'simple-icons:js', featured: true },
+  ]
 }
 
 const categories = Object.keys(technologies)
@@ -85,38 +93,50 @@ const Skills: React.FC = () => {
     })
   }, [])
 
+  // 1. FLATTEN: Get all technologies from all categories into one single array
+  // If you added 'featured: true' from the previous step, add .filter(t => t.featured) here
+  const allSkills = Object.values(technologies)
+    .flat()
+    .filter((tech) => tech.featured === true);
+
+  // 2. DISTRIBUTE: Create 3 balanced rows
+  const rows: Category[][] = [[], [], []]
+
+  allSkills.forEach((tech, index) => {
+    // This distributes items: 1st->Row1, 2nd->Row2, 3rd->Row3, 4th->Row1, etc.
+    const rowIndex = index % 3
+    rows[rowIndex].push(tech)
+  })
+
   return (
     <div className="z-30 mt-12 flex w-full flex-col max-w-[calc(100vw-5rem)] mx-auto lg:max-w-full">
       <div className="space-y-2">
-        {categoryGroups.map((group, groupIndex) => (
+        {rows.map((row, rowIndex) => (
           <InfiniteScroll
-            key={groupIndex}
+            key={rowIndex}
             duration={50000}
-            direction={groupIndex % 2 === 0 ? 'normal' : 'reverse'}
+            direction={rowIndex % 2 === 0 ? 'normal' : 'reverse'}
             showFade={true}
             className="flex flex-row justify-center"
           >
-            {group.flatMap((category) =>
-              technologies[category as keyof Technologies].map(
-                (tech: Category, techIndex: number) => {
-                  const IconComponent = getIcon(tech.logo)
-                  return (
-                    <div
-                      key={`${category}-${techIndex}`}
-                      className="tech-badge repo-card border-border bg-card text-muted-foreground mr-5 flex items-center gap-3 rounded-full border p-3 shadow-sm backdrop-blur-sm transition-all duration-300 hover:shadow-md"
-                      data-tech-name={`${category}-${techIndex}`}
-                    >
-                      <span className="bg-muted flex h-10 w-10 items-center justify-center rounded-full p-2 text-lg shadow-inner">
-                        <IconComponent className="tech-icon text-primary" />
-                      </span>
-                      <span className="text-foreground font-medium">
-                        {tech.text}
-                      </span>
-                    </div>
-                  )
-                },
-              ),
-            )}
+            {/* 3. RENDER: Map directly over the specific row items */}
+            {row.map((tech) => {
+              const IconComponent = getIcon(tech.logo)
+              return (
+                <div
+                  // Use tech.text as key since it's unique enough
+                  key={tech.text} 
+                  className="tech-badge repo-card border-border bg-card text-muted-foreground mr-5 flex items-center gap-3 rounded-full border p-3 shadow-sm backdrop-blur-sm transition-all duration-300 hover:shadow-md"
+                >
+                  <span className="bg-muted flex h-10 w-10 items-center justify-center rounded-full p-2 text-lg shadow-inner">
+                    <IconComponent className="tech-icon text-primary" />
+                  </span>
+                  <span className="text-foreground font-medium">
+                    {tech.text}
+                  </span>
+                </div>
+              )
+            })}
           </InfiniteScroll>
         ))}
       </div>

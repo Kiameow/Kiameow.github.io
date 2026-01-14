@@ -153,6 +153,10 @@ export const SOCIAL_LINKS: SocialLink[] = [
 
 Add MDX files to `src/content/blog/`:
 
+one article corresponds to one folder and the article must need to be named index.mdx
+
+you can add pics folder in that folder to store the medias needed by the article
+
 ```yaml
 ---
 title: 'Your Post Title'
